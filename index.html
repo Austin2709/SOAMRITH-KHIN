@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aston's HTML Projects</title>
+    <style>
+        :root {
+            --ink: #18202a;
+            --paper: #f5f1e8;
+            --accent: #c76b43;
+            --line: #d8cfc1;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        main {
+            width: min(900px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 12vh 0 10vh;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font: 700 0.8rem/1.2 Arial, sans-serif;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 700px;
+            margin: 18px 0;
+            font-size: clamp(2.8rem, 8vw, 6.5rem);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+        }
+
+        .intro {
+            max-width: 560px;
+            margin-bottom: 52px;
+            color: #5d625f;
+            font: 1.1rem/1.6 Arial, sans-serif;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1px;
+            border-top: 1px solid var(--line);
+            border-left: 1px solid var(--line);
+        }
+
+        a {
+            display: block;
+            min-height: 150px;
+            padding: 25px;
+            color: inherit;
+            text-decoration: none;
+            border-right: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            transition: background 180ms ease, color 180ms ease;
+        }
+
+        a:hover,
+        a:focus-visible {
+            color: var(--paper);
+            background: var(--ink);
+        }
+
+        h2 {
+            margin: 0 0 12px;
+            font-size: 1.35rem;
+        }
+
+        p {
+            margin: 0;
+            font: 0.95rem/1.5 Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="eyebrow">HTML Year 2</div>
+        <h1>Aston's HTML projects</h1>
+        <p class="intro">A collection of websites, exercises, and experiments built while learning HTML and CSS.</p>
+
+        <section class="projects" aria-label="Projects">
+            <a href="My%20own%20menu.html">
+                <h2>Royal Auto Garage</h2>
+                <p>A car showcase with interactive details.</p>
+            </a>
+            <a href="Gift_website.html">
+                <h2>Pair &amp; Promise</h2>
+                <p>A small gift shop website concept.</p>
+            </a>
+            <a href="Menu.html">
+                <h2>Menu project</h2>
+                <p>A restaurant-style navigation exercise.</p>
+            </a>
+            <a href="pr1.html">
+                <h2>Student score table</h2>
+                <p>A table layout exercise.</p>
+            </a>
+            <a href="css/Week8.html">
+                <h2>Week 8</h2>
+                <p>More HTML and CSS practice.</p>
+            </a>
+        </section>
+    </main>
+</body>
+</html>
