@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Royal Auto Garage</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+        :root {
+            --ink: #171717;
+            --graphite: #202120;
+            --charcoal: #292a27;
+            --paper: #f4f1eb;
+            --muted: #aaa79f;
+            --champagne: #c8a873;
+            --line: rgba(200, 168, 115, 0.28);
+            --soft-line: rgba(23, 23, 23, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--ink);
+            color: var(--paper);
+            font-family: 'DM Sans', Arial, sans-serif;
+            line-height: 1.5;
+        }
+
+        ::selection {
+            background: var(--champagne);
+            color: var(--ink);
+        }
+
+        /* ================= NAVIGATION ================= */
+
+        nav {
+            align-items: center;
+            background: rgba(23, 23, 23, 0.96);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            padding: 22px clamp(24px, 7vw, 96px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .brand {
+            color: var(--paper);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 21px;
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: var(--champagne);
+            display: block;
+            font-family: 'DM Sans', Arial, sans-serif;
+            font-size: 9px;
+            letter-spacing: 0.24em;
+            line-height: 1;
+            margin-top: 3px;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: clamp(18px, 3vw, 42px);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: var(--paper);
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--champagne);
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            align-items: flex-start;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(10, 10, 10, 0.88),
+                    rgba(10, 10, 10, 0.25)
+                ),
+                url('big_with_watermark_bmw-m4-phnom-penh-phnom-penh-5197.jpg') center / cover;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            min-height: 620px;
+
+            padding:
+                clamp(70px, 12vw, 150px)
+                clamp(24px, 10vw, 150px);
+            position: relative;
+        }
+
+        .hero::after {
+            border: 1px solid rgba(200, 168, 115, 0.55);
+            content: '';
+            height: 76%;
+            left: 7%;
+            pointer-events: none;
+            position: absolute;
+            top: 12%;
+            width: 86%;
+        }
+
+        .hero::before {
+            color: var(--champagne);
+            content: 'EST. 2026  /  PHNOM PENH';
+            font-size: 12px;
+            letter-spacing: 0.22em;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            color: white;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(44px, 7vw, 88px);
+            line-height: 0.98;
+            margin: 0;
+            max-width: 760px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            color: #e1c999;
+            font-size: clamp(16px, 2vw, 22px);
+            letter-spacing: 0.08em;
+            margin: 24px 0 0;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 34px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-link {
+            border: 1px solid var(--champagne);
+            color: var(--paper);
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            padding: 13px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .hero-link.primary,
+        .hero-link:hover {
+            background: var(--champagne);
+            color: var(--ink);
+        }
+
+        /* ================= CARS ================= */
+
+        .cars {
+            background: var(--paper);
+            color: var(--ink);
+            padding: clamp(70px, 9vw, 120px) clamp(24px, 8vw, 120px);
+        }
+
+        .section-kicker {
+            color: #8e6f38;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .cars h2,
+        .owner h2,
+        .contact h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(34px, 4vw, 52px);
+            font-weight: 600;
+            margin: 0 0 42px;
+        }
+
+        .cars h2::after,
+        .owner h2::after,
+        .contact h2::after {
+            background: var(--champagne);
+            content: '';
+            display: block;
+            height: 2px;
+            margin-top: 18px;
+            width: 54px;
+        }
+
+        .car-container {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 0 auto;
+            max-width: 1180px;
+        }
+
+        .car {
+            background: #fff;
+            border-top: 3px solid var(--champagne);
+            display: flex;
+            flex-direction: column;
+            min-height: 480px;
+            overflow: hidden;
+            position: relative;
+            transition: 0.25s;
+        }
+
+        .car::after {
+            border: 1px solid rgba(200, 168, 115, 0.42);
+            bottom: 10px;
+            content: '';
+            left: 10px;
+            pointer-events: none;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .car:hover {
+            box-shadow: 0 18px 35px rgba(23, 23, 23, 0.18);
+            transform: translateY(-6px);
+        }
+
+        .car-image {
+            height: 210px;
+            overflow: hidden;
+        }
+
+        .car-image img {
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+            width: 100%;
+        }
+
+        .car:hover .car-image img {
+            transform: scale(1.06);
+        }
+
+        .sale-badge {
+            background: var(--champagne);
+            color: var(--ink);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 8px 12px;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            z-index: 2;
+        }
+
+        .car-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 25px;
+        }
+
+        .car h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 25px;
+            margin: 0 0 14px;
+        }
+
+        .car p {
+            color: #68665f;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .car-meta {
+            border-bottom: 1px solid var(--soft-line);
+            border-top: 1px solid var(--soft-line);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin: 20px 0 16px;
+            padding: 12px 0;
+        }
+
+        .car-meta strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .car-meta span {
+            color: #8b887f;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .old-price {
+            color: #999;
+            font-size: 15px;
+            margin-top: auto;
+            text-decoration: line-through;
+        }
+
+        .price {
+            color: #8e6f38;
+            font-size: 25px;
+            font-weight: 700;
+            margin: 3px 0 18px;
+        }
+
+        .buy-btn {
+            align-self: flex-start;
+            background: var(--ink);
+            color: var(--paper);
+            cursor: pointer;
+            border: none;
+            padding: 12px 22px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .buy-btn:hover {
+            background: var(--champagne);
+            color: var(--ink);
+        }
+
+        /* ================= CAR DETAILS ================= */
+
+        #car-details {
+            background: var(--charcoal);
+            display: none;
+            min-height: 100vh;
+            padding: 80px clamp(24px, 8vw, 120px);
+        }
+
+        .details-container {
+            align-items: center;
+            display: grid;
+            gap: 60px;
+            grid-template-columns: 1.3fr 1fr;
+            margin: auto;
+            max-width: 1200px;
+        }
+
+        .details-image {
+            border: 1px solid var(--champagne);
+            overflow: hidden;
+        }
+
+        .details-image img {
+            display: block;
+            height: 500px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .details-info h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(38px, 5vw, 65px);
+            line-height: 1;
+            margin: 0 0 20px;
+        }
+
+        .limited {
+            background: var(--champagne);
+            color: var(--ink);
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-bottom: 20px;
+            padding: 8px 14px;
+        }
+
+        .details-old-price {
+            color: #888;
+            font-size: 20px;
+            text-decoration: line-through;
+        }
+
+        .details-price {
+            color: var(--champagne);
+            font-size: 40px;
+            font-weight: 700;
+            margin: 0 0 25px;
+        }
+
+        .details-specs {
+            border-top: 1px solid var(--line);
+            color: #ccc;
+            line-height: 2.2;
+            padding-top: 20px;
+        }
+
+        .contact-btn {
+            background: var(--champagne);
+            color: var(--ink);
+            display: inline-block;
+            font-weight: 700;
+            margin-top: 25px;
+            padding: 15px 28px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .contact-btn:hover {
+            background: white;
+        }
+
+        .back-btn {
+            color: var(--champagne);
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 40px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            color: white;
+        }
+
+        /* ================= OWNER ================= */
+
+        .owner {
+            background: var(--graphite);
+            padding: clamp(70px, 9vw, 120px) 24px;
+            text-align: center;
+        }
+
+        .owner h2 {
+            margin-bottom: 36px;
+        }
+
+        .owner h2::after {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .owner img {
+            border: 1px solid var(--champagne);
+            display: block;
+            height: 300px;
+            margin: 0 auto 24px;
+            object-fit: cover;
+            width: 250px;
+        }
+
+        .owner h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 28px;
+            margin: 0 0 10px;
+        }
+
+        .owner p {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.8;
+            margin: auto;
+            max-width: 650px;
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact {
+            background: var(--charcoal);
+            padding: clamp(70px, 9vw, 120px) clamp(24px, 8vw, 120px);
+            text-align: center;
+        }
+
+        .contact-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 28px;
+        }
+
+        .contact h2 {
+            margin-bottom: 30px;
+        }
+
+        .contact h2::after {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact p {
+            color: var(--muted);
+            margin: 12px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: var(--ink);
+            border-top: 1px solid var(--line);
+            color: #77756f;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            padding: 24px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .brand {
+                font-size: 19px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px 18px;
+            }
+
+            .hero {
+                min-height: 540px;
+            }
+
+            .hero p {
+                line-height: 1.5;
+            }
+
+            .car-container {
+                grid-template-columns: 1fr;
+            }
+
+            .details-container {
+                grid-template-columns: 1fr;
+            }
+
+            .details-image img {
+                height: 300px;
+            }
+
+            .hero-actions,
+            .contact-actions {
+                align-items: stretch;
+                flex-direction: column;
+                width: min(100%, 240px);
+            }
+        }
+
+        /* Modern showroom refinements */
+        body {
+            background: #f7f8fa;
+            color: #17202a;
+            font-family: 'DM Sans', Arial, sans-serif;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.94);
+            border-bottom: 1px solid #e6e9ed;
+            padding: 16px clamp(20px, 6vw, 88px);
+        }
+
+        .brand {
+            color: #17202a;
+            font-family: 'DM Sans', Arial, sans-serif;
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .brand span {
+            color: #718096;
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+        }
+
+        nav a {
+            color: #52606d;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-transform: none;
+        }
+
+        nav a:hover {
+            color: #1769aa;
+        }
+
+        .hero {
+            background:
+                linear-gradient(90deg, rgba(9, 19, 29, 0.82), rgba(9, 19, 29, 0.22)),
+                url('big_with_watermark_bmw-m4-phnom-penh-phnom-penh-5197.jpg') center / cover;
+            min-height: 530px;
+            padding: clamp(70px, 10vw, 120px) clamp(20px, 8vw, 110px);
+        }
+
+        .hero::after {
+            display: none;
+        }
+
+        .hero::before {
+            color: #a8d8ff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+        }
+
+        .hero h1 {
+            color: white;
+            font-family: 'DM Sans', Arial, sans-serif;
+            font-size: clamp(42px, 6vw, 76px);
+            font-weight: 700;
+            letter-spacing: -0.055em;
+            line-height: 0.98;
+            max-width: 690px;
+        }
+
+        .hero p {
+            color: #e5f3ff;
+            font-size: clamp(15px, 1.8vw, 20px);
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .hero-link,
+        .contact-btn {
+            border: 0;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0;
+            padding: 13px 20px;
+            text-transform: none;
+        }
+
+        .hero-link {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+        }
+
+        .hero-link.primary,
+        .hero-link:hover,
+        .contact-btn {
+            background: #2f8fce;
+            color: white;
+        }
+
+        .cars {
+            background: #f7f8fa;
+            padding: clamp(56px, 8vw, 96px) clamp(20px, 6vw, 88px);
+        }
+
+        .section-kicker {
+            color: #2f8fce;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            margin-bottom: 8px;
+        }
+
+        .cars h2,
+        .owner h2,
+        .contact h2 {
+            color: #17202a;
+            font-family: 'DM Sans', Arial, sans-serif;
+            font-size: clamp(30px, 4vw, 44px);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 32px;
+        }
+
+        .cars h2::after,
+        .owner h2::after,
+        .contact h2::after {
+            background: #2f8fce;
+            border-radius: 2px;
+            height: 3px;
+            margin-top: 12px;
+            width: 34px;
+        }
+
+        .car-container {
+            gap: 24px;
+            max-width: 1240px;
+        }
+
+        .car {
+            border: 1px solid #e3e8ee;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(35, 52, 68, 0.06);
+            min-height: 0;
+        }
+
+        .car::after {
+            display: none;
+        }
+
+        .car:hover {
+            box-shadow: 0 16px 32px rgba(35, 52, 68, 0.13);
+            transform: translateY(-4px);
+        }
+
+        .car-image {
+            height: 220px;
+        }
+
+        .sale-badge {
+            background: #e8f4fc;
+            border-radius: 5px;
+            color: #1769aa;
+            font-size: 10px;
+            padding: 7px 10px;
+        }
+
+        .car-content {
+            padding: 22px;
+        }
+
+        .car h3 {
+            color: #17202a;
+            font-family: 'DM Sans', Arial, sans-serif;
+            font-size: 20px;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+        }
+
+        .car p {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .car-meta {
+            border-color: #edf0f3;
+            margin: 16px 0;
+            padding: 10px 0;
+        }
+
+        .car-meta strong {
+            color: #17202a;
+        }
+
+        .car-meta span {
+            color: #8a98a8;
+            letter-spacing: 0.04em;
+        }
+
+        .old-price {
+            color: #9aa5b1;
+            font-size: 13px;
+        }
+
+        .price {
+            color: #1769aa;
+            font-size: 23px;
+            margin-bottom: 16px;
+        }
+
+        .buy-btn {
+            align-self: stretch;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 13px 18px;
+        }
+
+        .buy-btn:hover {
+            background: #1769aa;
+            color: white;
+        }
+
+        .owner {
+            background: white;
+            padding: clamp(56px, 8vw, 96px) 24px;
+        }
+
+        .owner img {
+            border: 0;
+            border-radius: 10px;
+            box-shadow: 0 12px 28px rgba(35, 52, 68, 0.12);
+        }
+
+        .owner h3 {
+            color: #17202a;
+            font-family: 'DM Sans', Arial, sans-serif;
+            font-size: 23px;
+        }
+
+        .owner p,
+        .contact p {
+            color: #718096;
+            font-size: 15px;
+        }
+
+        .contact {
+            background: #edf6fc;
+            padding: clamp(56px, 8vw, 96px) clamp(20px, 6vw, 88px);
+        }
+
+        .contact h2 {
+            color: #17202a;
+        }
+
+        footer {
+            background: #17202a;
+            border: 0;
+            color: #aab7c4;
+            padding: 22px;
+            text-transform: none;
+        }
+
+        @media (max-width: 800px) {
+            nav {
+                align-items: center;
+                flex-direction: row;
+                gap: 12px;
+                overflow-x: auto;
+            }
+
+            nav ul {
+                flex-wrap: nowrap;
+                gap: 16px;
+            }
+
+            nav a {
+                white-space: nowrap;
+            }
+
+            .brand span {
+                display: none;
+            }
+
+            .hero {
+                min-height: 560px;
+            }
+        }
+
+        #car-details {
+            background: #f7f8fa;
+            color: #17202a;
+            padding: clamp(32px, 6vw, 72px) clamp(20px, 6vw, 88px);
+        }
+
+        .back-btn {
+            color: #1769aa;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 28px;
+        }
+
+        .back-btn:hover {
+            color: #0f4f81;
+        }
+
+        .details-container {
+            align-items: start;
+            gap: clamp(28px, 5vw, 64px);
+            max-width: 1240px;
+        }
+
+        .details-image {
+            background: white;
+            border: 1px solid #e3e8ee;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(35, 52, 68, 0.08);
+        }
+
+        .details-image img {
+            height: min(62vw, 560px);
+            min-height: 360px;
+        }
+
+        .details-info {
+            padding-top: 10px;
+        }
+
+        .details-info h1 {
+            color: #17202a;
+            font-family: 'DM Sans', Arial, sans-serif;
+            font-size: clamp(34px, 4vw, 58px);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            line-height: 1;
+        }
+
+        .limited {
+            background: #e8f4fc;
+            border-radius: 5px;
+            color: #1769aa;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            margin-bottom: 24px;
+            padding: 8px 11px;
+        }
+
+        .details-old-price {
+            color: #9aa5b1;
+            font-size: 17px;
+        }
+
+        .details-price {
+            color: #1769aa;
+            font-size: clamp(34px, 4vw, 48px);
+            margin: 2px 0 28px;
+        }
+
+        .details-specs {
+            border-top: 1px solid #e0e6eb;
+            color: #52606d;
+            font-size: 15px;
+            line-height: 2.2;
+            padding-top: 18px;
+        }
+
+        .contact-btn {
+            margin-top: 24px;
+        }
+
+        @media (max-width: 800px) {
+            #car-details {
+                padding: 28px 20px 56px;
+            }
+
+            .details-container {
+                gap: 28px;
+            }
+
+            .details-info {
+                padding-top: 0;
+            }
+
+            .details-image img {
+                height: 300px;
+                min-height: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+        <a class="brand" href="#home" onclick="showHome()">
+            Royal Auto
+            <span>Garage / Phnom Penh</span>
+        </a>
+        <ul>
+            <li><a href="#home" onclick="showHome()">Home</a></li>
+            <li><a href="#cars" onclick="showHome()">Cars</a></li>
+            <li><a href="#owner" onclick="showHome()">Owner</a></li>
+            <li><a href="#contact" onclick="showHome()">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- ================= HOME ================= -->
+
+    <div id="home-page">
+
+        <section class="hero" id="home">
+
+            <h1>ROYAL AUTO GARAGE</h1>
+
+            <p>
+                Premium BMW & Mercedes-Benz Vehicles
+            </p>
+
+            <div class="hero-actions">
+                <a class="hero-link primary" href="#cars">Explore collection</a>
+                <a class="hero-link" href="#contact">Speak with us</a>
+            </div>
+
+        </section>
+
+
+        <!-- ================= CARS ================= -->
+
+        <section class="cars" id="cars">
+
+            <div class="section-kicker">The current collection</div>
+
+            <h2>Available Cars</h2>
+
+            <div class="car-container">
+
+                <!-- BMW M4 -->
+
+                <div class="car">
+
+                    <span class="sale-badge">
+                        SAVE $5,100
+                    </span>
+
+                    <div class="car-image">
+
+                        <!-- CHANGE THIS IMAGE PATH IF NEEDED -->
+
+                        <img
+                            src="big_with_watermark_bmw-m4-phnom-penh-phnom-penh-5197.jpg"
+                            alt="BMW M4 Competition"
+                        >
+
+                    </div>
+
+                    <div class="car-content">
+
+                        <h3>
+                            BMW M4 Competition
+                        </h3>
+
+                        <p>
+                            3.0L Twin-Turbo<br>
+                            Automatic<br>
+                            2025<br>
+                            503 HP
+                        </p>
+
+                        <div class="car-meta">
+                            <div><strong>503</strong><span>Horsepower</span></div>
+                            <div><strong>2025</strong><span>Model year</span></div>
+                        </div>
+
+                        <div class="old-price">
+                            $95,000
+                        </div>
+
+                        <div class="price">
+                            $89,900
+                        </div>
+
+                        <button
+                            class="buy-btn"
+                            onclick="showCar('m4')"
+                        >
+                            View Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MERCEDES AMG GT -->
+
+                <div class="car">
+
+                    <span class="sale-badge">
+                        SAVE $10,000
+                    </span>
+
+                    <div class="car-image">
+
+                        <img
+                            src="123.jpg"
+                            alt="Mercedes AMG GT"
+                        >
+
+                    </div>
+
+                    <div class="car-content">
+
+                        <h3>
+                            Mercedes-AMG GT
+                        </h3>
+
+                        <p>
+                            4.0L V8 Biturbo<br>
+                            Automatic<br>
+                            2025<br>
+                            577 HP
+                        </p>
+
+                        <div class="car-meta">
+                            <div><strong>577</strong><span>Horsepower</span></div>
+                            <div><strong>2025</strong><span>Model year</span></div>
+                        </div>
+
+                        <div class="old-price">
+                            $120,000
+                        </div>
+
+                        <div class="price">
+                            $110,000
+                        </div>
+
+                        <button
+                            class="buy-btn"
+                            onclick="showCar('amg')"
+                        >
+                            View Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BMW M5 -->
+
+                <div class="car">
+
+                    <span class="sale-badge">
+                        SAVE $7,500
+                    </span>
+
+                    <div class="car-image">
+
+                        <img
+                            src="images.jpg"
+                            alt="BMW M5"
+                        >
+
+                    </div>
+
+                    <div class="car-content">
+
+                        <h3>
+                            BMW M5
+                        </h3>
+
+                        <p>
+                            V8 Twin-Turbo<br>
+                            Automatic<br>
+                            2025<br>
+                            717 HP
+                        </p>
+
+                        <div class="car-meta">
+                            <div><strong>717</strong><span>Horsepower</span></div>
+                            <div><strong>2025</strong><span>Model year</span></div>
+                        </div>
+
+                        <div class="old-price">
+                            $110,000
+                        </div>
+
+                        <div class="price">
+                            $102,500
+                        </div>
+
+                        <button
+                            class="buy-btn"
+                            onclick="showCar('m5')"
+                        >
+                            View Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= OWNER ================= -->
+
+        <section class="owner" id="owner">
+
+            <h2>
+                Meet The Owner
+            </h2>
+
+            <img
+                src="Mclaren.jpg"
+                alt="Royal Auto Garage Owner"
+            >
+
+            <h3>
+                Owner & Founder
+            </h3>
+
+            <p>
+                Welcome to Royal Auto Garage.
+                We specialize in premium BMW and Mercedes-Benz vehicles,
+                providing quality cars and excellent customer service.
+            </p>
+
+        </section>
+
+
+        <!-- ================= CONTACT ================= -->
+
+        <section class="contact" id="contact">
+
+            <div class="section-kicker">Private appointments available</div>
+
+            <h2>
+                Contact Us
+            </h2>
+
+            <p>
+                📞 Phone: 0962739969
+            </p>
+
+            <p>
+                📧 Email: royalautogarage@gmail.com
+            </p>
+
+            <p>
+                📍 Location: Phnom Penh, Cambodia
+            </p>
+
+            <div class="contact-actions">
+                <a class="contact-btn" href="tel:0962739969">Call the garage</a>
+                <a class="hero-link" href="mailto:royalautogarage@gmail.com">Email us</a>
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <p>
+                © 2026 Royal Auto Garage.
+                All Rights Reserved.
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <!-- ================= CAR DETAILS PAGE ================= -->
+
+    <section id="car-details">
+
+        <div style="max-width:1200px; margin:auto;">
+
+            <a
+                class="back-btn"
+                onclick="showHome()"
+            >
+                ← Back to Available Cars
+            </a>
+
+
+            <div class="details-container">
+
+                <div class="details-image">
+
+                    <img
+                        id="details-img"
+                        src=""
+                        alt="Selected vehicle"
+                    >
+
+                </div>
+
+
+                <div class="details-info">
+
+                    <h1 id="details-name">
+                        Car
+                    </h1>
+
+                    <div class="limited">
+                        LIMITED TIME OFFER
+                    </div>
+
+                    <div
+                        class="details-old-price"
+                        id="details-old-price"
+                    >
+                    </div>
+
+                    <div
+                        class="details-price"
+                        id="details-price"
+                    >
+                    </div>
+
+                    <div
+                        class="details-specs"
+                        id="details-specs"
+                    >
+                    </div>
+
+                    <a
+                        href="tel:0962739969"
+                        class="contact-btn"
+                    >
+                        📞 Contact To Buy
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const cars = {
+
+            m4: {
+
+                name: "BMW M4 Competition",
+
+                image: "big_with_watermark_bmw-m4-phnom-penh-phnom-penh-5197.jpg",
+
+                oldPrice: "$95,000",
+
+                price: "$89,900",
+
+                specs: `
+                    🚗 Year: 2025<br>
+                    ⚙️ Transmission: Automatic<br>
+                    🔥 Engine: 3.0L Twin-Turbo<br>
+                    🐎 Power: 503 HP<br>
+                    🎨 Color: Black<br>
+                    💰 You Save: $5,100<br>
+                    📍 Location: Phnom Penh, Cambodia
+                `
+            },
+
+
+            amg: {
+
+                name: "Mercedes-AMG GT",
+
+                image: "123.jpg",
+
+                oldPrice: "$120,000",
+
+                price: "$110,000",
+
+                specs: `
+                    🚗 Year: 2025<br>
+                    ⚙️ Transmission: Automatic<br>
+                    🔥 Engine: 4.0L V8 Biturbo<br>
+                    🐎 Power: 577 HP<br>
+                    🎨 Color: Black<br>
+                    💰 You Save: $10,000<br>
+                    📍 Location: Phnom Penh, Cambodia
+                `
+            },
+
+
+            m5: {
+
+                name: "BMW M5",
+
+                image: "images.jpg",
+
+                oldPrice: "$110,000",
+
+                price: "$102,500",
+
+                specs: `
+                    🚗 Year: 2025<br>
+                    ⚙️ Transmission: Automatic<br>
+                    🔥 Engine: V8 Twin-Turbo<br>
+                    🐎 Power: 717 HP<br>
+                    🎨 Color: Black<br>
+                    💰 You Save: $7,500<br>
+                    📍 Location: Phnom Penh, Cambodia
+                `
+            }
+
+        };
+
+
+        function showCar(carId) {
+
+            const car = cars[carId];
+
+            document.getElementById("home-page").style.display = "none";
+
+            document.getElementById("car-details").style.display = "block";
+
+            document.getElementById("details-name").textContent = car.name;
+
+            document.getElementById("details-img").src = car.image;
+
+            document.getElementById("details-old-price").textContent = car.oldPrice;
+
+            document.getElementById("details-price").textContent = car.price;
+
+            document.getElementById("details-specs").innerHTML = car.specs;
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function showHome() {
+
+            document.getElementById("home-page").style.display = "block";
+
+            document.getElementById("car-details").style.display = "none";
+
+        }
+
+    </script>
+
+</body>
+</html>
